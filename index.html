@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenAI GPT-3.5 Demo</title>
+</head>
+<body>
+    <h1>OpenAI GPT-3.5 Demo</h1>
+    
+    <div id="output"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/openai/dist/openai.min.js"></script>
+    <script>
+        const openai = new OpenAI('{{"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"}}'); 
+
+        // GPT-3.5にリクエストを送信して応答を取得する関数
+        async function generateResponse(input) {
+            const response = await openai.complete({
+                engine: 'text-davinci-003', // 使用するエンジンを指定します
+                prompt: input,
+                maxTokens: 100 // 応答の最大トークン数
+            });
+
+            return response.choices[0].text.trim();
+        }
+
+        // ユーザーの入力に応答を生成する関数
+        async function generateOutput() {
+            const input = 'Hello, OpenAI!'; // ユーザーの入力を指定します
+            const output = await generateResponse(input);
+            document.getElementById('output').innerText = output;
+        }
+
+        // ページの読み込みが完了した時にgenerateOutput関数を呼び出します
+        window.addEventListener('load', generateOutput);
+    </script>
+</body>
+</html>
