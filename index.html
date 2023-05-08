@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>OpenAI GPT-3.5 Demo</title>
+    <title>OpenAI GPT-3.5 Chat Demo</title>
 </head>
 <body>
-    <h1>OpenAI GPT-3.5 Demo</h1>
+    <h1>OpenAI GPT-3.5 Chat Demo</h1>
+
+    <textarea id="input" rows="4" cols="50"></textarea><br>
+    <button onclick="generateOutput()">Ask</button><br><br>
     
     <div id="output"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/openai/dist/openai.min.js"></script>
     <script>
-        const openai = new OpenAI('{{"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"}}'); 
+        const openai = new OpenAI('{{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}}'); // YOUR_API_KEYを取得したAPIキーに置き換えてください
 
         // GPT-3.5にリクエストを送信して応答を取得する関数
         async function generateResponse(input) {
@@ -25,7 +28,7 @@
 
         // ユーザーの入力に応答を生成する関数
         async function generateOutput() {
-            const input = 'Hello, OpenAI!'; // ユーザーの入力を指定します
+            const input = document.getElementById('input').value; // ユーザーの入力を取得します
             const output = await generateResponse(input);
             document.getElementById('output').innerText = output;
         }
